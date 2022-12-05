@@ -16,7 +16,7 @@ origin="$(dirname "$origin")"
 targetArch=64
 [ "$1" == 32 ] && targetArch=32
 
-[ -z "$ANDROID_BUILD_TOP" ] && ANDROID_BUILD_TOP=/build2/AOSP-11.0/
+[ -z "$ANDROID_BUILD_TOP" ] && ANDROID_BUILD_TOP=/home/daniil/AndroidSources/AOSP12
 if [ "$targetArch" == 32 ];then
     srcFile="$ANDROID_BUILD_TOP/out/target/product/phhgsi_a64_ab/system.img"
 else
@@ -36,7 +36,7 @@ simg2img "$srcFile" s.img || cp "$srcFile" s.img
 rm -Rf tmp
 mkdir -p d tmp
 e2fsck -y -f s.img
-resize2fs s.img 3000M
+resize2fs s.img 3072M
 e2fsck -E unshare_blocks -y -f s.img
 mount -o loop,rw s.img d
 (
